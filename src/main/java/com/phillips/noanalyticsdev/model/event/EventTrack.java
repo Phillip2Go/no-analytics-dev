@@ -20,7 +20,7 @@ public class EventTrack implements Serializable {
     private User user;
     @OneToOne(cascade = CascadeType.ALL)
     private EventActionProps eventProps;
-    //@NotNull
+    @NotNull
     @Size(max = 32)
     private String tag;
     @Embedded

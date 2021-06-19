@@ -1,6 +1,5 @@
 package com.phillips.noanalyticsdev.controller;
 
-import com.phillips.noanalyticsdev.controller.noanalytics.noTaggController;
 import com.phillips.noanalyticsdev.service.UserService;
 import com.phillips.noanalyticsdev.util.ProductItem;
 import org.slf4j.Logger;

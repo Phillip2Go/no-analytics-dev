@@ -1,4 +1,4 @@
-package com.phillips.noanalyticsdev.service.noanalytics;
+package com.phillips.noanalyticsdev.service.analytics;
 
 import com.phillips.noanalyticsdev.dao.event.EventRepo;
 import com.phillips.noanalyticsdev.dao.event.EventTrackRepo;
@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
-public class noTaggService {
-    Logger log = LoggerFactory.getLogger(noTaggService.class);
+public class TrackingService {
+    Logger log = LoggerFactory.getLogger(TrackingService.class);
     @Autowired
     EventRepo eventRepo;
     @Autowired
@@ -37,8 +37,15 @@ public class noTaggService {
     }
 
     public Event createEvent(Map<String, String> data) {
-        Event event = new Event(data.get("eventName"), data.get("eventType"), data.get("pathname"), data.get("pagetitle"));
+        Event event;
+
+        if (data.get("contentType").equals("product-item")) {
+            event = new Event(data.get("eventName"), data.get("eventType"), data.get("pathname"), data.get("pagetitle"), data.get("contentTag"));
+        } else {
+            event = new Event(data.get("eventName"), data.get("eventType"), data.get("pathname"), data.get("pagetitle"), data.get("eventTag"));
+        }
         eventRepo.save(event);
+
         return event;
     }
 

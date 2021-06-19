@@ -31,7 +31,7 @@ public class UserService {
         List<ProductItem> items;
         List<ProductItem> userProducts = new ArrayList<>();
 
-        if (!userTracksExist(userId)) {
+        if (!userTracksExist(userId) || productAmount.isEmpty()) {
             return null;
         }
 

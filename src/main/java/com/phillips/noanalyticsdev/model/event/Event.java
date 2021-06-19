@@ -24,17 +24,21 @@ public class Event implements Serializable {
     private String pagetitle;
     @Min(1)
     private int count; // eventTracks.length
+    @NotNull
+    @Size(max = 32)
+    private String tag;
     // @Embedded
     // private OnPage onPage;
 
     public Event() {
     }
 
-    public Event(String eventName, String eventType, String pathname, String pagetitle) {
+    public Event(String eventName, String eventType, String pathname, String pagetitle, String tag) {
         this.eventName = eventName;
         this.eventType = eventType;
         this.pathname = pathname;
         this.pagetitle = pagetitle;
+        this.tag = tag;
         this.count = 1;
     }
 
@@ -84,6 +88,14 @@ public class Event implements Serializable {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     @Override
