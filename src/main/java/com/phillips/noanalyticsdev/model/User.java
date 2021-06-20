@@ -1,5 +1,7 @@
 package com.phillips.noanalyticsdev.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.phillips.noanalyticsdev.model.event.EventTrack;
 
 import javax.persistence.CascadeType;
@@ -15,6 +17,7 @@ public class User implements Serializable {
     @Id
     private String userId;
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+    @JsonManagedReference
     private List<EventTrack> eventTracks;
     @Min(1)
     private int visits;

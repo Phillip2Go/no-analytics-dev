@@ -1,5 +1,6 @@
 package com.phillips.noanalyticsdev.model.event;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.phillips.noanalyticsdev.util.OnPage;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Event implements Serializable {
     @Size(max = 32)
     private String eventType;
     @OneToMany(mappedBy = "event", cascade = {CascadeType.ALL})
+    @JsonManagedReference
     private List<EventTrack> eventTracks;
     @Size(max = 32)
     private String pathname;

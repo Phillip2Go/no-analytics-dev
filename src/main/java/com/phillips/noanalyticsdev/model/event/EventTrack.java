@@ -1,5 +1,6 @@
 package com.phillips.noanalyticsdev.model.event;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.phillips.noanalyticsdev.model.User;
 import com.phillips.noanalyticsdev.util.Product;
 
@@ -14,9 +15,11 @@ public class EventTrack implements Serializable {
     private Long trackId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="event_event_name", nullable=false)
+    @JsonBackReference
     private Event event;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_user_id", nullable=false)
+    @JsonBackReference
     private User user;
     @OneToOne(cascade = CascadeType.ALL)
     private EventActionProps eventProps;
