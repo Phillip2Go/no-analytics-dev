@@ -1,4 +1,4 @@
-package com.phillips.noanalyticsdev.model;
+package com.phillips.noanalyticsdev.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

@@ -1,8 +1,7 @@
 package com.phillips.noanalyticsdev.controller.cms;
 
-import com.phillips.noanalyticsdev.service.UserService;
+import com.phillips.noanalyticsdev.service.user.UserService;
 import com.phillips.noanalyticsdev.service.cms.CmsService;
-import com.phillips.noanalyticsdev.util.Cover;
 import com.phillips.noanalyticsdev.util.ProductItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +18,9 @@ import java.util.List;
 public class CmsController {
     Logger log = LoggerFactory.getLogger(CmsController.class);
     @Autowired
-    CmsService cmsService;
+    private CmsService cmsService;
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<String> getAllShops() {

@@ -2,10 +2,10 @@ package com.phillips.noanalyticsdev.service.analytics;
 
 import com.phillips.noanalyticsdev.dao.event.EventRepo;
 import com.phillips.noanalyticsdev.dao.event.EventTrackRepo;
-import com.phillips.noanalyticsdev.model.User;
+import com.phillips.noanalyticsdev.model.user.User;
 import com.phillips.noanalyticsdev.model.event.Event;
 import com.phillips.noanalyticsdev.model.event.EventTrack;
-import com.phillips.noanalyticsdev.service.UserService;
+import com.phillips.noanalyticsdev.service.user.UserService;
 import com.phillips.noanalyticsdev.util.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,20 +18,34 @@ import java.util.Map;
 public class TrackingService {
     Logger log = LoggerFactory.getLogger(TrackingService.class);
     @Autowired
-    EventRepo eventRepo;
+    private EventRepo eventRepo;
     @Autowired
-    EventTrackRepo eventTrackRepo;
+    private EventTrackRepo eventTrackRepo;
     @Autowired
-    UserService userService;
+    private UserService userService;
+    private static final String CONTENT_TYPE = "contentType";
+    private static final String EVENT_NAME = "eventName";
+    private static final String PRODUCT_ITEM = "product-item";
+    private static final String EVENT_TYPE = "eventType";
+    private static final String PATH_NAME = "pathname";
+    private static final String PAGE_TITLE = "pagetitle";
+    private static final String CONTENT_TAG = "contentTag";
+    private static final String EVENT_TAG = "eventTag";
+    private static final String CONTENT_NAME = "contentName";
+    private static final String TIMESTAMP = "timestamp";
 
-    public void taggEvent(Map<String, String> data) {
+    public void visitUser(Map<String, String> data) {
+        userService.checkUser(data);
+    }
+
+    public void trackEvent(Map<String, String> data) {
         User user = userService.getUser(data);
-        Event event = eventRepo.findByEventName(data.get("eventName"));
+        Event event = eventRepo.findByEventName(data.get(EVENT_NAME));
         if (event == null) {
             Event createdEvent = createEvent(data);
             createEventTrack(createdEvent, user, data);
         } else {
-            addCount(event);
+            addEventCount(event);
             createEventTrack(event, user, data);
         }
     }
@@ -39,29 +53,29 @@ public class TrackingService {
     public Event createEvent(Map<String, String> data) {
         Event event;
 
-        if (data.get("contentType").equals("product-item")) {
-            event = new Event(data.get("eventName"), data.get("eventType"), data.get("pathname"), data.get("pagetitle"), data.get("contentTag"));
+        if (data.get(CONTENT_TYPE).equals(PRODUCT_ITEM)) {
+            event = new Event(data.get(EVENT_NAME), data.get(EVENT_TYPE), data.get(PATH_NAME), data.get(PAGE_TITLE), data.get(CONTENT_TAG));
         } else {
-            event = new Event(data.get("eventName"), data.get("eventType"), data.get("pathname"), data.get("pagetitle"), data.get("eventTag"));
+            event = new Event(data.get(EVENT_NAME), data.get(EVENT_TYPE), data.get(PATH_NAME), data.get(PAGE_TITLE), data.get(EVENT_TAG));
         }
         eventRepo.save(event);
 
         return event;
     }
 
-    public void addCount(Event event) {
+    public void addEventCount(Event event) {
         int counter = event.getCount();
         event.setCount(counter + 1);
         eventRepo.save(event);
     }
 
     public void createEventTrack(Event event, User user, Map<String, String> data) {
-        if (data.get("contentType").equals("product-item")) {
-            Product product = new Product(data.get("contentName"), data.get("contentTag"));
-            EventTrack eventTrack = new EventTrack(event, user, product, data.get("contentTag"), data.get("timestamp"));
+        if (data.get(CONTENT_TYPE).equals(PRODUCT_ITEM)) {
+            Product product = new Product(data.get(CONTENT_NAME), data.get(CONTENT_TAG));
+            EventTrack eventTrack = new EventTrack(event, user, product, data.get(CONTENT_TAG), data.get(TIMESTAMP));
             eventTrackRepo.save(eventTrack);
         } else {
-            EventTrack eventTrack = new EventTrack(event, user, data.get("eventTag"), data.get("timestamp"));
+            EventTrack eventTrack = new EventTrack(event, user, data.get(EVENT_TAG), data.get(TIMESTAMP));
             eventTrackRepo.save(eventTrack);
         }
     }

@@ -15,12 +15,17 @@ import java.util.Map;
 public class TrackingController {
     Logger log = LoggerFactory.getLogger(TrackingController.class);
     @Autowired
-    TrackingService trackService;
+    private TrackingService trackService;
 
     @PostMapping(value = "/track", produces = MediaType.APPLICATION_JSON_VALUE)
     public void track(@RequestBody Map<String, String> data) {
-        log.info("noTagg Event:" + data);
-        trackService.taggEvent(data);
+        // log.info("noTagg Event:" + data);
+        trackService.trackEvent(data);
+    }
+
+    @PostMapping(value = "/cookieUserId", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void cookieUserId(@RequestBody Map<String, String> data) {
+        trackService.visitUser(data);
     }
 }
 

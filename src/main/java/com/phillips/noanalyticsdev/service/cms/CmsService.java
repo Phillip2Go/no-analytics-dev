@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class CmsService {
     @Autowired
-    WebClient cmsWebClient;
+    private WebClient cmsWebClient;
 
     public Flux<String> getAllShops() {
         return cmsWebClient.get()

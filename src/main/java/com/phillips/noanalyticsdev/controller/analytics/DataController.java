@@ -16,7 +16,7 @@ import java.util.List;
 public class DataController {
     Logger log = LoggerFactory.getLogger(DataController.class);
     @Autowired
-    DataService dataService;
+    private DataService dataService;
 
     @GetMapping(value = "/total/amount/{tag}", produces = MediaType.APPLICATION_JSON_VALUE)
     public int getTotalTagAmount(@PathVariable String tag) {

@@ -1,6 +1,6 @@
-package com.phillips.noanalyticsdev.dao;
+package com.phillips.noanalyticsdev.dao.user;
 
-import com.phillips.noanalyticsdev.model.User;
+import com.phillips.noanalyticsdev.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepo extends JpaRepository<User, String> {

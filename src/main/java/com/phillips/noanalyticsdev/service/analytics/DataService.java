@@ -16,9 +16,9 @@ import java.util.List;
 public class DataService {
     Logger log = LoggerFactory.getLogger(DataService.class);
     @Autowired
-    EventRepo eventRepo;
+    private EventRepo eventRepo;
     @Autowired
-    EventTrackRepo eventTrackRepo;
+    private EventTrackRepo eventTrackRepo;
 
     public int getTotalTagAmount(String tag) {
         List<Event> allEvents = eventRepo.findAllByTag(tag);

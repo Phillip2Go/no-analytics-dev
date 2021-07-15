@@ -1,7 +1,7 @@
 package com.phillips.noanalyticsdev.model.event;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.phillips.noanalyticsdev.model.User;
+import com.phillips.noanalyticsdev.model.user.User;
 import com.phillips.noanalyticsdev.util.Product;
 
 import javax.persistence.*;

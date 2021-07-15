@@ -1,13 +1,9 @@
 package com.phillips.noanalyticsdev;
 
-import com.phillips.noanalyticsdev.dao.UserRepo;
+import com.phillips.noanalyticsdev.dao.user.UserRepo;
 import com.phillips.noanalyticsdev.dao.event.EventActionPropsRepo;
 import com.phillips.noanalyticsdev.dao.event.EventRepo;
 import com.phillips.noanalyticsdev.dao.event.EventTrackRepo;
-import com.phillips.noanalyticsdev.model.User;
-import com.phillips.noanalyticsdev.model.event.Event;
-import com.phillips.noanalyticsdev.model.event.EventActionProps;
-import com.phillips.noanalyticsdev.model.event.EventTrack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
