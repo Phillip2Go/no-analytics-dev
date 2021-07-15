@@ -87,7 +87,7 @@ public class UserService {
         Map<String, Integer> productAmount = calcProductAmount(amount, userTags);
         Map<String, Integer> userPurchase = getUserOrder(userId);
 
-        if (!userTrackExist(userId) || productAmount.isEmpty()) {
+        if (!userTrackExist(userId) || productAmount == null) {
             return null;
         }
 
